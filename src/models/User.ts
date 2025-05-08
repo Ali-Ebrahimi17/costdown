@@ -1,5 +1,6 @@
-import { Schema, model, models } from 'mongoose'
+import { Schema, model, models, Model } from 'mongoose'
 const { ObjectId } = Schema
+import { IUser } from '@/types'
 
 // Define the schema
 const userSchema = new Schema(
@@ -57,6 +58,6 @@ const userSchema = new Schema(
   { timestamps: true }
 )
 // Define the  model
-const User = models?.User || model('User', userSchema)
+const User: Model<IUser> = models?.User || model<IUser>('User', userSchema)
 
 export default User

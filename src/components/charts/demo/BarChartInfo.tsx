@@ -18,16 +18,16 @@ type Props = {
   savingsData: ISaving[] | []
 }
 
-const BarChart = ({ chartData, savingsData }: Props) => {
-  // const labels = ['PYFY', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'FYF']
-
+const BarChartInfo = ({ chartData, savingsData }: Props) => {
   const labels = chartData.map((item) => item.month)
   const values = chartData.map((item) => item.value)
   const budget = chartData.map((item) => item.budget)
   const target = chartData.map((item) => item.target)
 
   const savings = chartData.map((elem) => {
-    return savingsData.filter((saving) => elem.monthNum > saving.cutInMonth).reduce((acc, curr) => acc + curr.perUnit, 0)
+    return savingsData
+      .filter((saving) => elem.monthNum > saving.cutInMonth && saving.inForecast === 'No')
+      .reduce((acc, curr) => acc + curr.perUnit, 0)
   })
 
   const cost = values.map((elem, i) => {
@@ -175,6 +175,18 @@ const BarChart = ({ chartData, savingsData }: Props) => {
             return label
           },
         },
+        // font: { size: 18, weight: 'bold' },
+        titleFont: {
+          // weight: 'normal',
+          size: 18,
+        },
+        // footerFont: {
+        //   weight: 'normal',
+        //   size: 15,
+        // },
+        bodyFont: {
+          size: 16,
+        },
       },
     },
     scales: {
@@ -182,22 +194,25 @@ const BarChart = ({ chartData, savingsData }: Props) => {
         display: true,
         stacked: true,
         grid: {
-          display: false,
+          display: true,
           color: '#544C4A',
+        },
+        border: {
+          dash: [2, 4],
         },
         // title: {
         //   display: true,
         //   text: 'Minutes',
         // },
         // min: 0,
-        max: chartMax,
+        // max: chartMax,
         ticks: {
           autoSkip: false,
-          maxRotation: 90,
-          minRotation: 90,
+          // maxRotation: 90,
+          // minRotation: 90,
           font: {
             // family: 'LatoBold',
-            size: 9,
+            size: 14,
             // weight: 'bold',
             // lineHeight: 1.2,
           },
@@ -211,18 +226,32 @@ const BarChart = ({ chartData, savingsData }: Props) => {
         },
       },
       y: {
-        type: 'linear',
-        display: false,
-        position: 'left',
+        // min: 0,
+        max: chartMax,
+        // type: 'linear',
+        // display: false,
+        // position: 'left',
         stacked: true,
-
         grid: {
           display: true,
           color: '#544C4A',
         },
+        border: {
+          dash: [2, 4],
+        },
         title: {
           display: false,
           text: 'Minutes',
+        },
+        // font: {
+        //   size: 20,
+        // },
+        ticks: {
+          // Include a dollar sign in the ticks
+          callback: function (value: any) {
+            return '£' + value
+          },
+          font: { size: 17, weight: 'bold' },
         },
       },
       y1: {
@@ -238,31 +267,8 @@ const BarChart = ({ chartData, savingsData }: Props) => {
         },
       },
     },
-    tooltip: {
-      callbacks: {
-        label: (context: any) => {
-          let title = context.dataset.label
-          // console.log(context)
-          // console.log(dataArr[context.dataIndex].inspections)
-          // context.label + ': ' + Math.round(context.formattedValue) + '%',
-
-          // return 'DPU ' + title + ': ' + context.formattedValue
-          return title + ': ' + context.formattedValue
-        },
-      },
-      // titleFont: {
-      //   weight: 'normal',
-      // },
-      // footerFont: {
-      //   weight: 'normal',
-      //   size: 15,
-      // },
-      // bodyFont: {
-      //   size: 15,
-      // },
-    },
   } as any
   return <Bar options={options} data={data} plugins={[ChartDataLabels]} />
 }
 
-export default BarChart
+export default BarChartInfo

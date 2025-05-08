@@ -7,16 +7,12 @@ import { ActionResult } from '@/types'
 import { LoginSchema } from '@/lib/schemas/loginSchema'
 import { signIn, signOut, auth } from '@/auth'
 import { AuthError } from 'next-auth'
-
+import { generateToken } from '@/lib/tokens'
 import { IUser } from '@/types'
-// import { generateToken } from '@/lib/tokens'
-import { isJcbEmail, stringifyForComponent } from '@/lib/helper_functions'
-import { generateToken } from '@/lib/token'
-// import { sendVerificationEmail } from '@/lib/mail'
-import connectDB from '@/lib/db'
-// import { sendVerificationEmail } from '@/lib/mail'
 
-// import { sendVerificationEmail } from '@/lib/mail'
+import { isJcbEmail, stringifyForComponent } from '@/lib/helper_functions'
+
+import connectDB from '@/lib/db'
 
 export const signInUser = async (data: LoginSchema): Promise<ActionResult<string>> => {
   try {
@@ -24,18 +20,6 @@ export const signInUser = async (data: LoginSchema): Promise<ActionResult<string
     const existingUser = await User.findOne({ email: data.email })
 
     if (!existingUser) return { status: 'error', error: 'Invalid credentials' }
-
-    // if (!existingUser.emailVerified) {
-    // 	const token = generateToken(1)
-
-    // 	await User.findByIdAndUpdate(existingUser._id, {
-    // 		varificationToken: token.string,
-    // 		varificationTokenExpires: token.expires,
-    // 	})
-    // 	await sendVerificationEmail(data.email, token.string)
-
-    // 	return { status: 'error', error: 'Please verify email address' }
-    // }
 
     await signIn('credentials', {
       email: data.email,
@@ -68,7 +52,7 @@ export const signOutUser = async () => {
   await signOut({ redirectTo: '/' })
 }
 
-export const registerUser = async (data: RegisterSchema): Promise<ActionResult<IUser>> => {
+export const registerUser = async (data: RegisterSchema) => {
   try {
     await connectDB()
     const validated = registerSchema.safeParse(data)
@@ -99,11 +83,11 @@ export const registerUser = async (data: RegisterSchema): Promise<ActionResult<I
 
     // TODO: send email for varification
 
-    await sendVerificationEmail(data.email, token.string)
+    // await sendVerificationEmail(data.email, token.string)
 
     return {
       status: 'success',
-      data: stringifyForComponent(user),
+      data: { status: 'success' },
     }
   } catch (error) {
     console.log(error)
@@ -137,7 +121,7 @@ export const verifyEmail = async (token: string): Promise<ActionResult<string>> 
 
     if (!foundUser) return { status: 'error', error: 'Invalid token' }
 
-    const hasExpired = new Date() > foundUser.varificationTokenExpires
+    const hasExpired = foundUser.varificationTokenExpires ? new Date() > foundUser.varificationTokenExpires : true
 
     if (hasExpired) return { status: 'error', error: 'Token has expired' }
 

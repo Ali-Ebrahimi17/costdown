@@ -3,6 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/auth'
 import Providers from '@/components/Providers'
 import './globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import TopNav from '@/components/layout/navbar/TopNav'
 import Footer from '@/components/layout/Footer'
 
@@ -21,10 +22,10 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang='en' className='bg-black text-white'>
-        <body className='font-Lato'>
+        <body className='font-Lato bg-black text-white'>
           <Providers>
             <TopNav />
-            <main className='mx-4 mb-12'>{children}</main>
+            <main className='mx-4 mb-12 '>{children}</main>
             <Footer />
           </Providers>
         </body>

@@ -17,3 +17,12 @@
     font-display: swap;
   }
 }
+
+table {
+  vertical-align: middle;
+  text-align: center;
+}
+table > tbody > tr > td {
+  vertical-align: middle;
+  text-align: center;
+}

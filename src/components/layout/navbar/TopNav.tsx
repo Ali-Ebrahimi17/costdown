@@ -29,17 +29,17 @@ const TopNav = async () => {
         <NavButtons />
       </div>
 
-      <NavbarContent justify='end'>
+      {/* <NavbarContent justify='end'>
         {userInfo ? (
           <UserMenu userInfo={userInfo} />
         ) : (
           <div className='flex gap-3 text-black font-LatoBold'>
-            {/* <NavLink href='/login' label='Login' /> */}
+   
             <Link href='/login'>Login</Link>
             <Link href='/register'>Sign Up</Link>
           </div>
         )}
-      </NavbarContent>
+      </NavbarContent> */}
     </Navbar>
   )
 }

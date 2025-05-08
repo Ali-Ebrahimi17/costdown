@@ -18,7 +18,7 @@ const NavButtons = () => {
     <div className='flex gap-4'>
       <TiHome className='mt-1 cursor-pointer' size={28} color='black' onClick={handleGoHome} />
 
-      <FaBackward className='mt-2 cursor-pointer  ' size={25} color='black' onClick={handleBackClick} />
+      {/* <FaBackward className='mt-2 cursor-pointer  ' size={25} color='black' onClick={handleBackClick} /> */}
     </div>
   )
 }

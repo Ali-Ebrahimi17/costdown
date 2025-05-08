@@ -24,6 +24,9 @@ export default {
         tbc: '#64748b',
         audited: '#2563eb',
         issued: '#78716c',
+        // costdown
+        // background: '#1a1a1a',
+        background: '#212529',
       },
       fontFamily: {
         Lato: 'Lato',

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const user = await User.findById(id)
 
   if (user) {
-    const userObject: IUser = {
+    const userObject: any = {
       ...user.toObject(),
       _id: user._id.toString(),
     }

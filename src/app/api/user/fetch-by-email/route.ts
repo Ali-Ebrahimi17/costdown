@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db'
 import User from '@/models/User'
 import { IUser } from '@/types'
-import socket from '@/lib/socket'
+
 // api/user/fetch-by-email
 export async function POST(req: Request) {
   await connectDB()
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   if (user) {
     // socket.emit('active', user._id)
-    const userObject: IUser = {
+    const userObject: any = {
       ...user.toObject(),
       _id: user._id.toString(),
     }

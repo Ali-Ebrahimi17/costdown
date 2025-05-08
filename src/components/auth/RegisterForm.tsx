@@ -28,7 +28,7 @@ const RegisterForm = () => {
       toast.success('Registered successfully')
       router.push('/register/success')
     } else {
-      handleFormServerErrors(result, setError)
+      handleFormServerErrors(result as any, setError)
     }
 
     // console.log(data)
@@ -72,16 +72,8 @@ const RegisterForm = () => {
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}
             />
-            {errors.root?.serverError && (
-              <p className='text-danger text-sm'>{errors.root.serverError.message}</p>
-            )}
-            <Button
-              isDisabled={!isValid}
-              fullWidth
-              type='submit'
-              isLoading={isSubmitting}
-              className='bg-jcb font-LatoBold'
-            >
+            {errors.root?.serverError && <p className='text-danger text-sm'>{errors.root.serverError.message}</p>}
+            <Button isDisabled={!isValid} fullWidth type='submit' isLoading={isSubmitting} className='bg-jcb font-LatoBold'>
               Sign Up
             </Button>
           </div>

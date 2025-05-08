@@ -1,14 +1,24 @@
 import BarChart from '@/components/charts/demo/BarChart'
-import FileUploader from '@/components/files/FileUploader'
+import LandingPageCharts from '@/components/costdown/landing-page/LandingPageCharts'
+import SummaryHeader from '@/components/costdown/landing-page/SummaryHeader'
+import { notFound } from 'next/navigation'
 
-export default function Home() {
+import MainHeader from '@/components/layout/MainHeader'
+import { getGraphData } from './actions/costActions'
+
+export default async function Home() {
+  const data = await getGraphData()
+
+  if (!data) return notFound()
+
+  const categories = data.categories
+
   return (
-    <section>
-      <div>Home page</div>
-      <div className='h-80h w-95w'>
-        <BarChart />
-        {/* <FileUploader /> */}
-      </div>
-    </section>
+    <>
+      <MainHeader mainText='Costdown' subText='Loadall' />
+
+      {/* <SummaryHeader categories={categories} /> */}
+      <LandingPageCharts categories={categories} />
+    </>
   )
 }

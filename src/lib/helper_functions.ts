@@ -1,5 +1,5 @@
 // stringify data for client component
-export const stringifyForComponent = (data: any[]) => {
+export const stringifyForComponent = (data: any) => {
   if (!data) return []
   return JSON.parse(JSON.stringify(data))
 }
