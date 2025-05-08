@@ -107,7 +107,7 @@ export default function EditSavingModal({ showEditModal, handleHideEditModal, se
             <Form.Label className='pl-2 font-LatoBold'>Cut in month</Form.Label>
             <Form.Select onChange={(e) => setCutInMonth(e.target.value)}>
               <option>{cutInMonth}</option>
-              {monthsOptions.map((month) => (
+              {monthsArr.map((month) => (
                 <option key={month}>{month}</option>
               ))}
             </Form.Select>

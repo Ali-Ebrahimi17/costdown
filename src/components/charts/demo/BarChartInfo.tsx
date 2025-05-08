@@ -7,6 +7,7 @@ import { Bar } from 'react-chartjs-2'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { ISaving, IStat } from '@/types'
 import { MdHeight } from 'react-icons/md'
+import { CURRENT_MONTH_NUM } from '@/lib/conatants'
 
 // ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, TimeScale)
 
@@ -26,7 +27,7 @@ const BarChartInfo = ({ chartData, savingsData }: Props) => {
 
   const savings = chartData.map((elem) => {
     return savingsData
-      .filter((saving) => elem.monthNum > saving.cutInMonth && saving.inForecast === 'No')
+      .filter((saving) => elem.monthNum > CURRENT_MONTH_NUM && elem.monthNum > saving.cutInMonth && saving.inForecast === 'No')
       .reduce((acc, curr) => acc + curr.perUnit, 0)
   })
 
@@ -61,31 +62,6 @@ const BarChartInfo = ({ chartData, savingsData }: Props) => {
     labels,
     datasets: [
       {
-        label: 'Cost',
-        // data: labels.map(() => faker.number.int({ min: 0.1, max: 3 })),
-        data: cost,
-        // borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: colorArr,
-        borderRadius: 4,
-        datalabels: {
-          display: false,
-        },
-        yAxisID: 'y',
-      },
-      {
-        label: 'Savings',
-        // data: labels.map(() => faker.number.int({ min: 0.1, max: 3 })),
-        data: savings,
-        borderColor: colorArr,
-        borderWidth: 2,
-        backgroundColor: 'rgba(105, 105, 105, 0.6',
-        borderRadius: 4,
-        datalabels: {
-          display: false,
-        },
-        yAxisID: 'y',
-      },
-      {
         label: 'Budget',
         data: budget,
         backgroundColor: '#0284c7',
@@ -114,6 +90,31 @@ const BarChartInfo = ({ chartData, savingsData }: Props) => {
           display: false,
         },
         yAxisID: 'y1',
+      },
+      {
+        label: 'Forecast',
+        // data: labels.map(() => faker.number.int({ min: 0.1, max: 3 })),
+        data: cost,
+        // borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: colorArr,
+        borderRadius: 4,
+        datalabels: {
+          display: false,
+        },
+        yAxisID: 'y',
+      },
+      {
+        label: 'Savings',
+        // data: labels.map(() => faker.number.int({ min: 0.1, max: 3 })),
+        data: savings,
+        borderColor: colorArr,
+        borderWidth: 2,
+        backgroundColor: 'rgba(105, 105, 105, 0.6',
+        borderRadius: 4,
+        datalabels: {
+          display: false,
+        },
+        yAxisID: 'y',
       },
     ],
   } as any

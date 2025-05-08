@@ -81,11 +81,9 @@ const SavingsTable = ({ category }: Props) => {
 
   const handleShowAddModal = () => {
     setShowAddModal(true)
-    console.log('ADD')
   }
   const handleHideAddModal = () => {
     setShowAddModal(false)
-    console.log('ADD')
   }
   const handleShowEditModal = (item: any) => {
     setSelectedSaving(item)
@@ -107,7 +105,6 @@ const SavingsTable = ({ category }: Props) => {
     setShowEditModal(false)
   }
   const handleShowDeleteModal = (item: any) => {
-    console.log(item)
     setSelectedSaving(item)
     setShowDeleteModal(true)
   }
@@ -136,10 +133,13 @@ const SavingsTable = ({ category }: Props) => {
       {selectedSaving && selectedSaving._id !== '' && (
         <DeleteSavingModal selectedSaving={selectedSaving} showDeleteModal={showDeleteModal} handleCloseDeleteModal={handleCloseDeleteModal} />
       )}
-      <div className='flex flex-col h-100 text-white '>
-        <div className='position-absolute -mt-12'>
-          <FaPlus className='text-2xl cursor-pointer mb-2 ml-[15px]' onClick={handleShowAddModal} />
-        </div>
+      <div className='flex flex-col h-100 text-white'>
+        {category.name.substring(0, 5) !== 'Total' && (
+          <div className='position-absolute -mt-12'>
+            <FaPlus className='text-2xl cursor-pointer mb-2 ml-[15px]' onClick={handleShowAddModal} />
+          </div>
+        )}
+
         <div className='flex-grow overflow-auto '>
           <table className='table table-dark table-hover uppercase text-sm'>
             <thead>

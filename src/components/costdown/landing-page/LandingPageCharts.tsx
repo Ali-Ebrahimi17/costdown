@@ -35,7 +35,7 @@ export default function LandingPageCharts({ categories }: Props) {
                 </div>
                 <div>
                   <div>Target</div>
-                  <div>£{cat.target}</div>
+                  <div>£{Math.round(cat.budget * 0.9).toLocaleString()}</div>
                 </div>
               </div>
             </Link>

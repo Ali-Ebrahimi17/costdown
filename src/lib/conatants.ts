@@ -1,3 +1,5 @@
 export const TOTAL_VOLUME = 19868
 
 export const TOTAL_VOLUME_ARR = [1485, 1542, 1751, 1728, 1476, 1998, 1311, 1419, 1891, 1899, 1814, 1554]
+
+export const CURRENT_MONTH_NUM = 3

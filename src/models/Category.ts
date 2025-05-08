@@ -13,6 +13,9 @@ export const categorySchema = new Schema(
     ownerName: {
       type: String,
     },
+    group: {
+      type: String,
+    },
     forecast: {
       type: Number,
     },

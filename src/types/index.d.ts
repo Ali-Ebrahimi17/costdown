@@ -59,6 +59,7 @@ export interface ISaving {
 export interface ICategory {
   name: string
   ownerName: string
+  group: string
   forecast: number
   budget: number
   target: number
