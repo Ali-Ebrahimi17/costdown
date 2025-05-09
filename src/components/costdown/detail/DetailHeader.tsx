@@ -7,12 +7,12 @@ type Props = {
 }
 
 export default function DetailHeader({ category }: Props) {
-  const targetSaving = ((category?.budget - category?.target) * TOTAL_VOLUME).toLocaleString()
+  const targetSaving = +((category?.budget - category?.target) * TOTAL_VOLUME).toFixed(2)
 
   let monthNumArr = [...Array(14).keys()]
 
   const commSavingArr = monthNumArr.map((num) => {
-    const saving = category.savings.filter((item) => item.cutInMonth < num).reduce((acc, curr) => acc + curr.perUnit, 0)
+    const saving = category.savings.filter((item) => item.cutInMonth < num && item.inForecast === 'No').reduce((acc, curr) => acc + curr.perUnit, 0)
 
     return +saving.toFixed(2)
   })
@@ -40,7 +40,7 @@ export default function DetailHeader({ category }: Props) {
         <div className='flex justify-evenly w-100 p-2 '>
           <div>
             <div>Target Saving</div>
-            <div className='font-LatoBold'>£{targetSaving}</div>
+            <div className='font-LatoBold'>£{targetSaving.toLocaleString()}</div>
           </div>
           <div>
             <div>Calendarised Saving</div>
@@ -56,15 +56,15 @@ export default function DetailHeader({ category }: Props) {
         <div className='flex justify-around w-100 p-2'>
           <div>
             <div>Forecast</div>
-            <div className='font-LatoBold'>£{category?.forecast}</div>
+            <div className='font-LatoBold'>£{+category.forecast.toFixed(2).toLocaleString()}</div>
           </div>
           <div>
             <div>Budget</div>
-            <div className='font-LatoBold'>£{category?.budget}</div>
+            <div className='font-LatoBold'>£{+category?.budget.toFixed(2).toLocaleString()}</div>
           </div>
           <div>
             <div>Target</div>
-            <div className='font-LatoBold'>£{category?.target}</div>
+            <div className='font-LatoBold'>£{+category?.target.toFixed(2).toLocaleString()}</div>
           </div>
         </div>
       </div>

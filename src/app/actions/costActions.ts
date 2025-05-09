@@ -19,8 +19,16 @@ export const getGraphData = async () => {
       const foundStats = stats.filter((elem: IStat) => elem.name === item.name).sort((a, b) => a.monthNum - b.monthNum)
       const savingsArr = savings.filter((sav) => sav.categoryId === item._id.toString()).sort()
 
+      const fyfStat = foundStats.find((stat) => stat.month == 'FYF')
+
+      const catValue = fyfStat ? fyfStat.value : 0
+      const catBudget = fyfStat ? fyfStat.budget : 0
+
       let obj = {
         ...item,
+        forecast: catValue,
+        budget: catBudget,
+        target: catBudget * 0.9,
         monthlyData: foundStats,
         savings: savingsArr,
       }
@@ -69,7 +77,7 @@ export const getGraphData = async () => {
         savings: savingsArr,
         budget: statsArr.sort((a, b) => a.monthNum - b.monthNum)[statsArr.length - 1].budget,
         forecast: statsArr.sort((a, b) => a.monthNum - b.monthNum)[statsArr.length - 1].value,
-        target: statsArr.sort((a, b) => a.monthNum - b.monthNum)[statsArr.length - 1].target,
+        target: statsArr.sort((a, b) => a.monthNum - b.monthNum)[statsArr.length - 1].value * 0.9,
       }
       totals.push(obj)
     }
@@ -159,12 +167,20 @@ export const getGraphDataById = async (id: string) => {
       const category = await Category.findById(id).lean()
       if (!category) return null
 
-      const stats = await Stat.find({ name: category.name }).sort({ monthNum: 1 }).lean()
+      const foundStats = await Stat.find({ name: category.name }).sort({ monthNum: 1 }).lean()
       const savingsArr = await Saving.find({ categoryId: id })
+
+      const fyfStat = foundStats.find((stat) => stat.month == 'FYF')
+
+      const catValue = fyfStat ? fyfStat.value : 0
+      const catBudget = fyfStat ? fyfStat.budget : 0
 
       const populatedCategory = {
         ...category,
-        monthlyData: stats,
+        forecast: catValue,
+        budget: catBudget,
+        target: catBudget * 0.9,
+        monthlyData: foundStats,
         savings: savingsArr,
       }
 

@@ -27,15 +27,15 @@ export default function LandingPageCharts({ categories }: Props) {
               <div className='flex justify-evenly text-sm mt-2 text-center text-gray-300 font-LatoBold'>
                 <div>
                   <div>Forecast</div>
-                  <div>£{cat.forecast}</div>
+                  <div>£{+cat.forecast.toFixed(2).toLocaleString()}</div>
                 </div>
                 <div>
                   <div>Budget</div>
-                  <div>£{cat.budget}</div>
+                  <div>£{+cat.budget.toFixed(2).toLocaleString()}</div>
                 </div>
                 <div>
                   <div>Target</div>
-                  <div>£{Math.round(cat.budget * 0.9).toLocaleString()}</div>
+                  <div>£{+cat.target.toFixed(2).toLocaleString()}</div>
                 </div>
               </div>
             </Link>

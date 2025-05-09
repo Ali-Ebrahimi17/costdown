@@ -9,10 +9,7 @@ import { ISaving, IStat } from '@/types'
 import { MdHeight } from 'react-icons/md'
 import { CURRENT_MONTH_NUM } from '@/lib/conatants'
 
-// ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels, TimeScale)
-
 defaults.color = 'white'
-// defaults.font.family = 'Lato'
 
 type Props = {
   chartData: IStat[] | []
@@ -20,12 +17,10 @@ type Props = {
 }
 
 const BarChart = ({ chartData, savingsData }: Props) => {
-  // const labels = ['PYFY', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'FYF']
-
   const labels = chartData.map((item) => item.month)
-  const values = chartData.map((item) => item.value)
-  const budget = chartData.map((item) => item.budget)
-  const target = chartData.map((item) => item.target)
+  const values = chartData.map((item) => +item.value?.toFixed(2))
+  const budget = chartData.map((item) => +item.budget?.toFixed(2))
+  const target = chartData.map((item) => +item.target?.toFixed(2))
 
   const savings = chartData.map((elem) => {
     return savingsData
@@ -43,22 +38,7 @@ const BarChart = ({ chartData, savingsData }: Props) => {
 
   const chartMax = Math.ceil(largestCost / 50) * 50
 
-  const colorArr = [
-    '#cbd5e1',
-    '#16a34a',
-    '#16a34a',
-    '#16a34a',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-    '#fcb026',
-  ]
+  const colorArr = ['#cbd5e1', ...new Array(CURRENT_MONTH_NUM).fill('#16a34a'), ...new Array(13 - CURRENT_MONTH_NUM).fill('#fcb026')]
 
   const data = {
     labels,
