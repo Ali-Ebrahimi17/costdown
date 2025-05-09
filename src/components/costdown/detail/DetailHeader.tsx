@@ -12,7 +12,7 @@ export default function DetailHeader({ category }: Props) {
   let monthNumArr = [...Array(14).keys()]
 
   const commSavingArr = monthNumArr.map((num) => {
-    const saving = category.savings.filter((item) => item.cutInMonth < num && item.inForecast === 'No').reduce((acc, curr) => acc + curr.perUnit, 0)
+    const saving = category.savings.filter((item) => item.cutInMonth < num).reduce((acc, curr) => acc + curr.perUnit, 0)
 
     return +saving.toFixed(2)
   })
