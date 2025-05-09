@@ -24,11 +24,13 @@ export const getGraphData = async () => {
       const catValue = fyfStat ? fyfStat.value : 0
       const catBudget = fyfStat ? fyfStat.budget : 0
 
+      const catTarget = item.name === 'Direct Labour' ? catValue * 0.966491377 : catBudget * 0.9
+
       let obj = {
         ...item,
         forecast: catValue,
         budget: catBudget,
-        target: catBudget * 0.9,
+        target: catTarget,
         monthlyData: foundStats,
         savings: savingsArr,
       }
@@ -175,11 +177,13 @@ export const getGraphDataById = async (id: string) => {
       const catValue = fyfStat ? fyfStat.value : 0
       const catBudget = fyfStat ? fyfStat.budget : 0
 
+      const catTarget = category.name === 'Direct Labour' ? catValue * 0.966491377 : catBudget * 0.9
+
       const populatedCategory = {
         ...category,
         forecast: catValue,
         budget: catBudget,
-        target: catBudget * 0.9,
+        target: catTarget,
         monthlyData: foundStats,
         savings: savingsArr,
       }
