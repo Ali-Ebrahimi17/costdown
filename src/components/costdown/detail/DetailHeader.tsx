@@ -1,3 +1,5 @@
+'use client'
+
 import { TOTAL_VOLUME, TOTAL_VOLUME_ARR } from '@/lib/conatants'
 import { ICategory } from '@/types'
 import React from 'react'

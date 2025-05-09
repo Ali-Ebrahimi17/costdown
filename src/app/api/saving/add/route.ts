@@ -19,10 +19,12 @@ export async function POST(req: Request) {
   const cutInMonth = monthsArr.indexOf(data.cutInMonth) + 1
   const saving = +data.saving
 
+  const fixedCutIn = cutInMonth === 0 ? 99 : cutInMonth
+
   const newData = {
     ...data,
     perUnit: +perUnit.toFixed(2),
-    cutInMonth,
+    cutInMonth: fixedCutIn,
     saving,
   }
 

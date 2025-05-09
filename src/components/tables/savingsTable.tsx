@@ -164,7 +164,7 @@ const SavingsTable = ({ category }: Props) => {
                       <td>{item.description}</td>
                       <td>£{item.saving.toLocaleString()}</td>
                       <td>£{item.perUnit}</td>
-                      <td>{item.cutInMonth}</td>
+                      <td>{item.cutInMonth < 13 ? item.cutInMonth : ''}</td>
                       <td>{item.inForecast}</td>
                       <td>{item.owner}</td>
                       <td>

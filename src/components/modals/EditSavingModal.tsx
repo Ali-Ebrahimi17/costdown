@@ -41,11 +41,11 @@ export default function EditSavingModal({ showEditModal, handleHideEditModal, se
       setLoading(false)
       return
     }
-    if (cutInMonth.trim().length < 1) {
-      toast.error('Please add cut in month')
-      setLoading(false)
-      return
-    }
+    // if (cutInMonth.trim().length < 1) {
+    //   toast.error('Please add cut in month')
+    //   setLoading(false)
+    //   return
+    // }
     if (owner.trim().length < 1) {
       toast.error('Please add owner')
       setLoading(false)
@@ -107,6 +107,7 @@ export default function EditSavingModal({ showEditModal, handleHideEditModal, se
             <Form.Label className='pl-2 font-LatoBold'>Cut in month</Form.Label>
             <Form.Select onChange={(e) => setCutInMonth(e.target.value)}>
               <option>{cutInMonth}</option>
+              <option></option>
               {monthsArr.map((month) => (
                 <option key={month}>{month}</option>
               ))}

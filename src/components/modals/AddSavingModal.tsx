@@ -49,11 +49,11 @@ export default function AddSavingModal({ showAddModal, handleHideAddModal, categ
       setLoading(false)
       return
     }
-    if (cutInMonth.trim().length < 1) {
-      toast.error('Please add cut in month')
-      setLoading(false)
-      return
-    }
+    // if (cutInMonth.trim().length < 1) {
+    //   toast.error('Please add cut in month')
+    //   setLoading(false)
+    //   return
+    // }
     if (owner.trim().length < 1) {
       toast.error('Please add owner')
       setLoading(false)
@@ -62,6 +62,8 @@ export default function AddSavingModal({ showAddModal, handleHideAddModal, categ
 
     try {
       setLoading(true)
+
+  
 
       let data = {
         categoryId,
