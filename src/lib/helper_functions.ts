@@ -50,3 +50,13 @@ export const getUniqueByObjectValue = (arr: any[], prop: string) => {
 
 // pass array of objects and prop
 // let data = getUniqueBy(users, 'fullName')
+
+export const formatToCurrency = (num: number | string) => {
+  const formatedNum = +num
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(formatedNum)
+}

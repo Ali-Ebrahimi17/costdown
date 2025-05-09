@@ -71,9 +71,11 @@ export const getGraphData = async () => {
 
       const savingsArr = savings.filter((sav) => ids.includes(sav.categoryId)).sort()
 
+      let title = name === 'nonbom' ? 'Total Non-Bom' : 'Total VPO'
+
       let obj = {
         _id: name,
-        name: `Total ${capitalizeFirstLetterOfAllWords(name)}`,
+        name: title,
         ownerName: 'John Godfrey',
         monthlyData: statsArr.sort((a, b) => a.monthNum - b.monthNum),
         savings: savingsArr,
@@ -149,9 +151,11 @@ export const getGraphDataById = async (id: string) => {
           })
           .sort()
 
+        let title = name === 'nonbom' ? 'Total Non-Bom' : 'Total VPO'
+
         let obj = {
           _id: name,
-          name: `Total ${capitalizeFirstLetterOfAllWords(name)}`,
+          name: title,
           ownerName: 'John Godfrey',
           monthlyData: statsArr.sort((a, b) => a.monthNum - b.monthNum),
           savings: savingsArr,

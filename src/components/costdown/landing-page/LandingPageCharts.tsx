@@ -1,6 +1,7 @@
 'use client'
 
 import BarChart from '@/components/charts/demo/BarChart'
+import { formatToCurrency } from '@/lib/helper_functions'
 import { ICategory, IStat } from '@/types'
 import Link from 'next/link'
 
@@ -27,15 +28,15 @@ export default function LandingPageCharts({ categories }: Props) {
               <div className='flex justify-evenly text-sm mt-2 text-center text-gray-300 font-LatoBold'>
                 <div>
                   <div>Forecast</div>
-                  <div>£{+cat.forecast.toFixed(2).toLocaleString()}</div>
+                  <div>{formatToCurrency(cat.forecast)}</div>
                 </div>
                 <div>
                   <div>Budget</div>
-                  <div>£{+cat.budget.toFixed(2).toLocaleString()}</div>
+                  <div>{formatToCurrency(cat.budget)}</div>
                 </div>
                 <div>
                   <div>Target</div>
-                  <div>£{+cat.target.toFixed(2).toLocaleString()}</div>
+                  <div>{formatToCurrency(cat.target)}</div>
                 </div>
               </div>
             </Link>
